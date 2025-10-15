@@ -1,10 +1,13 @@
 package org.sopt;
 
 import org.sopt.controller.MemberController;
+import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
 import org.sopt.repository.MemoryMemberRepository;
 import org.sopt.service.MemberServiceimpl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -32,17 +35,24 @@ public class Main {
 
             switch (choice) {
                 case "1":
-                    System.out.print("등록할 회원 이름을 입력하세요: ");
-                    String name = scanner.nextLine();
-                    if (name.trim().isEmpty()) {
-                        System.out.println("⚠️ 이름을 입력해주세요.");
-                        continue;
-                    }
-                    Long createdId = memberController.createMember(name);
-                    if (createdId != null) {
+                    try {
+                        System.out.print("이름: ");
+                        String name = scanner.nextLine();
+                        System.out.print("생년월일 (YYYY-MM-DD): ");
+                        LocalDate birth = LocalDate.parse(scanner.nextLine());
+                        System.out.print("이메일: ");
+                        String email = scanner.nextLine();
+                        System.out.print("성별 (MALE/FEMALE): ");
+                        Gender gender = Gender.valueOf(scanner.nextLine().toUpperCase());
+
+                        // 변경된 메서드 호출
+                        Long createdId = memberController.createMember(name, birth, email, gender);
                         System.out.println("✅ 회원 등록 완료 (ID: " + createdId + ")");
-                    } else {
-                        System.out.println("❌ 회원 등록 실패");
+
+                    } catch (DateTimeParseException e) {
+                        System.out.println("❌ 날짜 형식이 올바르지 않습니다. (YYYY-MM-DD)");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("❌ 성별을 MALE 또는 FEMALE로 정확히 입력해주세요.");
                     }
                     break;
                 case "2":
@@ -51,7 +61,13 @@ public class Main {
                         Long id = Long.parseLong(scanner.nextLine());
                         Optional<Member> foundMember = memberController.findMemberById(id);
                         if (foundMember.isPresent()) {
-                            System.out.println("✅ 조회된 회원: ID=" + foundMember.get().getId() + ", 이름=" + foundMember.get().getName());
+                            Member m = foundMember.get();
+                            System.out.println("✅ 조회된 회원");
+                            System.out.println("ID=" + m.getId());
+                            System.out.println("이름: " + m.getName());
+                            System.out.println("이메일: " + m.getEmail());
+                            System.out.println("생년월일: " + m.getBirth());
+                            System.out.println("성별: " + m.getGender());
                         } else {
                             System.out.println("⚠️ 해당 ID의 회원을 찾을 수 없습니다.");
                         }
