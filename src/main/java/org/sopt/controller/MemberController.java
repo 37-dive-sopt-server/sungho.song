@@ -28,4 +28,8 @@ public class MemberController {
     public Optional<Member> findMemberByEmail(String email) {
         return memberServiceimpl.findByEmail(email);
     }
+
+    public void deleteMember(Long id) {
+        memberServiceimpl.deleteMember(id);
+    }
 }

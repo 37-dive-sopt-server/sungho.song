@@ -39,4 +39,10 @@ public class MemberServiceimpl implements MemberService {
     public Optional<Member> findByEmail(String email) {
         return memberRepository.findByEmail(email);
     }
+
+    public void deleteMember(Long memberId) {
+        memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회원을 찾을 수 없습니다."));
+        memberRepository.deleteById(memberId);
+    }
 }

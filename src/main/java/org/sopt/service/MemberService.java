@@ -13,4 +13,6 @@ public interface MemberService {
     List<Member> findAllMembers();
 
     Optional<Member> findByEmail(String email);
+
+    void deleteMember(Long memberId);
 }
