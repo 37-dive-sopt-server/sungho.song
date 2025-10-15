@@ -24,4 +24,8 @@ public class MemberController {
     public List<Member> getAllMembers() {
         return memberServiceimpl.findAllMembers();
     }
+
+    public Optional<Member> findMemberByEmail(String email) {
+        return memberServiceimpl.findByEmail(email);
+    }
 }

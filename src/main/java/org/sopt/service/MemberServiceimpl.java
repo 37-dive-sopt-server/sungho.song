@@ -35,4 +35,8 @@ public class MemberServiceimpl implements MemberService {
     public List<Member> findAllMembers() {
         return memberRepository.findAll();
     }
+
+    public Optional<Member> findByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
 }

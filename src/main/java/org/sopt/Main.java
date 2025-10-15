@@ -42,10 +42,13 @@ public class Main {
                         LocalDate birth = LocalDate.parse(scanner.nextLine());
                         System.out.print("이메일: ");
                         String email = scanner.nextLine();
+                        if (memberController.findMemberByEmail(email).isPresent()) {
+                            System.out.println("❌ 이미 존재하는 이메일입니다.");
+                            continue;
+                        }
                         System.out.print("성별 (MALE/FEMALE): ");
                         Gender gender = Gender.valueOf(scanner.nextLine().toUpperCase());
 
-                        // 변경된 메서드 호출
                         Long createdId = memberController.createMember(name, birth, email, gender);
                         System.out.println("✅ 회원 등록 완료 (ID: " + createdId + ")");
 
@@ -53,6 +56,8 @@ public class Main {
                         System.out.println("❌ 날짜 형식이 올바르지 않습니다. (YYYY-MM-DD)");
                     } catch (IllegalArgumentException e) {
                         System.out.println("❌ 성별을 MALE 또는 FEMALE로 정확히 입력해주세요.");
+                    } catch (IllegalStateException e) {
+                        System.out.println("❌ " + e.getMessage());
                     }
                     break;
                 case "2":
