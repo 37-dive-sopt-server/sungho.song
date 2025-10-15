@@ -21,8 +21,8 @@ public class OutputView {
         System.out.println("✅ 조회된 회원");
         System.out.println("ID: " + member.getId());
         System.out.println("이름: " + member.getName());
-        System.out.println("이메일: " + member.getEmail());
         System.out.println("생년월일: " + member.getBirth());
+        System.out.println("이메일: " + member.getEmail());
         System.out.println("성별: " + member.getGender());
     }
 
