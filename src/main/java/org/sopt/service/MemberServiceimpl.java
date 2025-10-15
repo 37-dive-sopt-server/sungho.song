@@ -1,8 +1,10 @@
 package org.sopt.service;
 
+import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
 import org.sopt.repository.MemoryMemberRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +13,9 @@ public class MemberServiceimpl implements MemberService {
     private final MemoryMemberRepository memberRepository = new MemoryMemberRepository();
     private static long sequence = 1L;
 
-    public Long join(String name) {
+    public Long join(String name, LocalDate birth, String email, Gender gender) {
 
-        Member member = new Member(sequence++, name);
+        Member member = new Member(sequence++, name, birth, email, gender);
         memberRepository.save(member);
         return member.getId();
     }
