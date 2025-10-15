@@ -89,7 +89,12 @@ public class Main {
                     else {
                         System.out.println("--- 📋 전체 회원 목록 📋 ---");
                         for (Member member : allMembers) {
-                            System.out.println("👤 ID=" + member.getId() + ", 이름=" + member.getName());
+                            System.out.println("👤 ID=" + member.getId() + "" +
+                                    ", 이름=" + member.getName() + "" +
+                                    ", 생년월일=" + member.getBirth() + "" +
+                                    ", email=" + member.getEmail() + "" +
+                                    ", 성별=" + member.getGender() + ""
+                            );
                         }
                         System.out.println("--------------------------");
                     }
