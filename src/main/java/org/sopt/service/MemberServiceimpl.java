@@ -10,8 +10,13 @@ import java.util.Optional;
 
 public class MemberServiceimpl implements MemberService {
 
-    private final MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    //private final MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemoryMemberRepository memberRepository;
     private static long sequence = 1L;
+
+    public MemberServiceimpl(MemoryMemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     public Long join(String name, LocalDate birth, String email, Gender gender) {
         vaildateDuplication(email);

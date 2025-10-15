@@ -5,7 +5,7 @@ import java.util.List;
 
 public class OutputView {
 
-    public void displayMenu() {
+    public void outputMenu() {
         System.out.println("\n✨ --- DIVE SOPT 회원 관리 서비스 --- ✨");
         System.out.println("---------------------------------");
         System.out.println("1️⃣. 회원 등록 ➕");
@@ -17,7 +17,7 @@ public class OutputView {
         System.out.print("메뉴를 선택하세요: ");
     }
 
-    public void displayMemberDetails(Member member) {
+    public void outputMemberDetails(Member member) {
         System.out.println("✅ 조회된 회원");
         System.out.println("ID: " + member.getId());
         System.out.println("이름: " + member.getName());
@@ -26,7 +26,7 @@ public class OutputView {
         System.out.println("성별: " + member.getGender());
     }
 
-    public void displayAllMembers(List<Member> allMembers) {
+    public void outputAllMembers(List<Member> allMembers) {
         if (allMembers.isEmpty()) {
             System.out.println("ℹ️ 등록된 회원이 없습니다.");
             return;
@@ -43,11 +43,11 @@ public class OutputView {
         System.out.println("--------------------------");
     }
 
-    public void displayMessage(String message) {
+    public void outputMessage(String message) {
         System.out.println(message);
     }
 
-    public void displayError(String errorMessage) {
+    public void outputError(String errorMessage) {
         System.out.println("❌ " + errorMessage);
     }
 }
