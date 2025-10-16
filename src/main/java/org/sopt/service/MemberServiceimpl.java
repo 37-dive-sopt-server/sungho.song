@@ -2,6 +2,7 @@ package org.sopt.service;
 
 import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
+import org.sopt.repository.MemberRepository;
 import org.sopt.repository.MemoryMemberRepository;
 
 import java.time.LocalDate;
@@ -12,10 +13,11 @@ import java.util.Optional;
 public class MemberServiceimpl implements MemberService {
 
     //private final MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-    private final MemoryMemberRepository memberRepository;
+    //private final MemoryMemberRepository memberRepository;
+    private final MemberRepository  memberRepository;
     private static long sequence = 1L;
 
-    public MemberServiceimpl(MemoryMemberRepository memberRepository) {
+    public MemberServiceimpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
