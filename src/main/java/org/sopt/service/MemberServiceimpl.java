@@ -5,6 +5,7 @@ import org.sopt.domain.Member;
 import org.sopt.repository.MemoryMemberRepository;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,11 +20,20 @@ public class MemberServiceimpl implements MemberService {
     }
 
     public Long join(String name, LocalDate birth, String email, Gender gender) {
+        validateAge(birth);
         vaildateDuplication(email);
 
         Member member = new Member(sequence++, name, birth, email, gender);
         memberRepository.save(member);
         return member.getId();
+    }
+
+    private void validateAge(LocalDate birth) {
+        LocalDate today = LocalDate.now();
+        int age = Period.between(birth, today).getYears();
+        if(age < 20) {
+            throw new IllegalArgumentException("⚠️ 20세 미만은 가입이 불가능합니다.");
+        }
     }
 
     private void vaildateDuplication(String email) {
