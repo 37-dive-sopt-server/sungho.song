@@ -38,4 +38,8 @@ public class MemberController {
     public void deleteMember(Long id) {
         memberService.deleteMember(id);
     }
+
+    public void validateAge(LocalDate birth) {
+        memberService.validateAge(birth);
+    }
 }

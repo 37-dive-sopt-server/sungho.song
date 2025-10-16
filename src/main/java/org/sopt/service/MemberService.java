@@ -15,4 +15,7 @@ public interface MemberService {
     Optional<Member> findByEmail(String email);
 
     void deleteMember(Long memberId);
+
+    // 나이 검증
+    void validateAge(LocalDate birth);
 }

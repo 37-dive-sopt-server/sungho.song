@@ -28,7 +28,7 @@ public class MemberServiceimpl implements MemberService {
         return member.getId();
     }
 
-    private void validateAge(LocalDate birth) {
+    public void validateAge(LocalDate birth) {
         LocalDate today = LocalDate.now();
         int age = Period.between(birth, today).getYears();
         if(age < 20) {

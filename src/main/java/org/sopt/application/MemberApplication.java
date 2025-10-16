@@ -49,13 +49,23 @@ public class MemberApplication {
     }
 
     private void registerMember() {
-        String name = inputView.inputName();
-        LocalDate birth = inputView.inputBirth();
-        String email = inputView.inputEmail();
-        Gender gender = inputView.inputGender();
+        try {
+            String name = inputView.inputName();
+            LocalDate birth = inputView.inputBirth();
+            memberController.validateAge(birth); // 20세 미만인지 검증
 
-        Long createdId = memberController.createMember(name, birth, email, gender);
-        outputView.outputMessage("✅ 회원 등록 완료 (ID: " + createdId + ")");
+            String email = inputView.inputEmail();
+            if (memberController.findMemberByEmail(email).isPresent()) {
+                outputView.outputError("이미 존재하는 이메일입니다.");
+                return;
+            }
+            Gender gender = inputView.inputGender();
+
+            Long createdId = memberController.createMember(name, birth, email, gender);
+            outputView.outputMessage("✅ 회원 등록 완료 (ID: " + createdId + ")");
+        } catch (IllegalArgumentException e) {
+            outputView.outputError(e.getMessage());
+        }
     }
 
     private void findMemberById() {
