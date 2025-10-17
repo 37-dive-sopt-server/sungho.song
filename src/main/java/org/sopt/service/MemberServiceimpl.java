@@ -23,7 +23,7 @@ public class MemberServiceimpl implements MemberService {
 
     public Long join(String name, LocalDate birth, String email, Gender gender) {
         validateAge(birth);
-        vaildateDuplication(email);
+        validateDuplicationEmail(email);
 
         Member member = new Member(sequence++, name, birth, email, gender);
         memberRepository.save(member);
@@ -38,7 +38,7 @@ public class MemberServiceimpl implements MemberService {
         }
     }
 
-    private void vaildateDuplication(String email) {
+    private void validateDuplicationEmail(String email) {
         memberRepository.findByEmail(email)
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 이메일입니다.");
